@@ -3,18 +3,21 @@ import pandas as pd
 import pickle
 import os
 
-# Optional debug
-st.write("Current Directory:", os.getcwd())
-st.write("Files in folder:", os.listdir())
+st.set_page_config(page_title="AI Drug Recommendation System", page_icon="🧬")
 
-# Load model and encoders
-with open(r"C:\Users\Sujal Damor\OneDrive\Desktop\My career\8 sem project\model.pkl", "rb") as f:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "model.pkl")
+encoders_path = os.path.join(BASE_DIR, "encoders.pkl")
+
+st.write("Current Directory:", os.getcwd())
+st.write("App Directory:", BASE_DIR)
+st.write("Files in app folder:", os.listdir(BASE_DIR))
+
+with open(model_path, "rb") as f:
     model = pickle.load(f)
 
-with open(r"C:\Users\Sujal Damor\OneDrive\Desktop\My career\8 sem project\encoders.pkl", "rb") as f:
+with open(encoders_path, "rb") as f:
     le_sex, le_bp, le_chol, le_drug = pickle.load(f)
-
-st.set_page_config(page_title="AI Drug Recommendation System", page_icon="🧬")
 
 st.title("🧬 AI-based Drug Recommendation System")
 st.write("Enter patient details to predict the most suitable drug type.")

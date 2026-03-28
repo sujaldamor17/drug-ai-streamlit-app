@@ -40,10 +40,11 @@ st.markdown("""
 .block-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
+    max-width: 1200px;
 }
 .title-box {
-    padding: 1.5rem;
-    border-radius: 18px;
+    padding: 1.6rem;
+    border-radius: 20px;
     background: linear-gradient(90deg, #1e293b, #0f766e);
     color: white;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
@@ -55,24 +56,46 @@ st.markdown("""
     border-radius: 16px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.2);
     border: 1px solid #1f2937;
+    color: #f8fafc;
+}
+.metric-card h2, .metric-card h4 {
+    color: #f8fafc;
+    margin: 0;
 }
 .output-card {
     background: linear-gradient(90deg, #064e3b, #065f46);
     padding: 1.2rem;
     border-radius: 18px;
-    color: white;
+    color: #ffffff;
     font-size: 1.1rem;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
+.output-card b {
+    color: #ffffff;
+}
 .info-card {
-    background: #0f172a;
+    background: #1e293b;
     padding: 1rem;
     border-radius: 16px;
-    border: 1px solid #1e293b;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    line-height: 1.7;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+.info-card b, .info-card strong {
+    color: #ffffff;
+}
+.info-card p, .info-card div, .info-card span, .info-card li {
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
 }
 .small-text {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     color: #cbd5e1;
+}
+.section-gap {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -135,7 +158,7 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<div class='section-gap'></div>", unsafe_allow_html=True)
 
 # ---------------- MAIN CONTENT ----------------
 left_col, right_col = st.columns([1.2, 1])
@@ -151,9 +174,8 @@ with left_col:
     st.subheader("🧠 Model Overview")
     st.markdown("""
     <div class="info-card">
-        This prototype uses a <b>Random Forest Classifier</b> trained on patient clinical parameters
-        to recommend the most suitable drug type. The system simulates a basic
-        <b>AI-powered clinical decision support tool</b>.
+        <p>This prototype uses a <b>Random Forest Classifier</b> trained on patient clinical parameters to recommend the most suitable drug type.</p>
+        <p>It demonstrates a basic <b>AI-powered clinical decision support tool</b> for academic and portfolio purposes.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -161,10 +183,10 @@ with right_col:
     st.subheader("ℹ️ About This Prototype")
     st.markdown("""
     <div class="info-card">
-        <b>Project Type:</b> Bioinformatics + AI<br><br>
-        <b>Use Case:</b> Drug type recommendation<br><br>
-        <b>ML Algorithm:</b> Random Forest<br><br>
-        <b>Goal:</b> Demonstrate how AI can assist in personalized treatment decision support.
+        <p><b>Project Type:</b> Bioinformatics + AI</p>
+        <p><b>Use Case:</b> Drug type recommendation</p>
+        <p><b>ML Algorithm:</b> Random Forest</p>
+        <p><b>Goal:</b> Demonstrate how AI can assist in treatment decision support.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -182,7 +204,7 @@ if predict_btn:
     prediction = model.predict(sample_df)[0]
     predicted_drug = drug_map_reverse[prediction]
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<div class='section-gap'></div>", unsafe_allow_html=True)
     st.subheader("✅ Prediction Result")
     st.markdown(f"""
     <div class="output-card">
@@ -190,7 +212,6 @@ if predict_btn:
     </div>
     """, unsafe_allow_html=True)
 
-    # Probability if available
     if hasattr(model, "predict_proba"):
         probabilities = model.predict_proba(sample_df)[0]
         prob_df = pd.DataFrame({
@@ -207,9 +228,8 @@ if predict_btn:
     st.subheader("🩺 Clinical Interpretation")
     st.markdown(f"""
     <div class="info-card">
-        Based on the entered patient parameters, the model predicts <b>{predicted_drug}</b> 
-        as the most suitable drug category. This result is generated using learned patterns
-        from the training dataset and serves as a demonstration of AI-assisted decision support.
+        <p>Based on the entered patient parameters, the model predicts <b>{predicted_drug}</b> as the most suitable drug category.</p>
+        <p>This result is generated from patterns learned during training and is shown here as an <b>AI-assisted recommendation prototype</b>.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -217,7 +237,7 @@ if predict_btn:
 st.markdown("---")
 st.markdown("""
 <div class="small-text">
-<b>Disclaimer:</b> This is an academic machine learning prototype developed for demonstration purposes only. 
+<b>Disclaimer:</b> This is an academic machine learning prototype developed for demonstration purposes only.
 It is not intended for real clinical diagnosis or treatment decisions.
 </div>
 """, unsafe_allow_html=True)
